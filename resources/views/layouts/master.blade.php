@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <title>Reddit Clone</title>
 
 
     <!-- Bootstrap Core CSS -->
@@ -32,6 +33,17 @@
 
     <!-- Page Content -->
     <div class="container">
+
+        @if(session()->has('SUCCESS_MESSAGE'))
+            <div class="alert alert-success">
+                <p>{{ session('SUCCESS_MESSAGE') }}</p>
+            </div>
+        @endif
+        @if(session()->has('ERROR_MESSAGE'))
+            <div class="alert alert-danger">
+                <p>{{ session('ERROR_MESSAGE') }}</p>
+            </div>
+        @endif
 
         <!-- Page Heading -->
         <div class="row">
