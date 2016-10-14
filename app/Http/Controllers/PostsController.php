@@ -10,6 +10,13 @@ use App\Http\Controllers\Controller;
 
 class PostsController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -51,7 +58,7 @@ class PostsController extends Controller
         $request->session()->forget('ERROR_MESSAGE');
 
         $post = new Post;
-        $post->created_by = 1;
+        $post->created_by = $request->user()->id;
         $post->title = $request->title;
         $post->url = $request->url;
         $post->content = $request->content;

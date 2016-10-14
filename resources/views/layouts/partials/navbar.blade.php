@@ -16,14 +16,14 @@
             <ul class="nav navbar-nav">
                 <li><a href="{{ action('PostsController@index') }}">Posts</a></li>
 
-                {{-- logged in links --}}
-                <li><a href="#">User's Name</a></li>
-                <li><a href="#">Logout</a></li>
-                <li><a href="{{ action('PostsController@create') }}">Create Post</a></li>
-
-                {{-- not logged in links --}}
-                <li><a href="#">Login</a></li>
-                <li><a href="#">Register</a></li>
+                @if(Auth::check())
+                    <li><a href="{{ action('UsersController@show', Auth::id()) }}">{{ Auth::user()->name }}</a></li>
+                    <li><a href="{{ action('Auth\AuthController@getLogout') }}">Logout</a></li>
+                    <li><a href="{{ action('PostsController@create') }}">Create Post</a></li>
+                @else
+                    <li><a href="{{ action('Auth\AuthController@getLogin') }}">Login</a></li>
+                    <li><a href="{{ action('Auth\AuthController@getRegister') }}">Register</a></li>
+                @endif
             </ul>
             {{-- <form class="navbar-form navbar-right" method="GET" action="{{ action('PostsController@index') }}">
                 <div class="form-group">
